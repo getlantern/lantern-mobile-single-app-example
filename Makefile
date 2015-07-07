@@ -5,9 +5,17 @@ define pkg_variables
 	$(eval MAIN_ACTIVITY := $(shell aapt dump badging $(APK_FILE)|awk -F" " '/launchable-activity/ {print $$2}'|awk -F"'" '/name=/ {print $$2}' | grep MainActivity))
 endef
 
+FLASHLIB := app/src/main/jniLibs/armeabi-v7a/libgojni.so
+
 .PHONY: all
 
-all: build-debug install run
+all: test-flashlib build-debug install run
+
+test-flashlib:
+	@if test ! -f $(FLASHLIB); then \
+	  echo "Please compile Flashlib mobile backend before compiling this app"; \
+		exit 1; \
+  fi
 
 build-debug:
 	./gradlew assembleDebug
@@ -27,4 +35,5 @@ run:
 	adb shell am start -n $(PACKAGE)/$(MAIN_ACTIVITY)
 
 clean:
-	./gradlew clean
+	./gradlew clean && rm $(FLASHLIB)
+
