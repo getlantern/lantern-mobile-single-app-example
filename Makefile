@@ -5,11 +5,11 @@ define pkg_variables
 	$(eval MAIN_ACTIVITY := $(shell aapt dump badging $(APK_FILE)|awk -F" " '/launchable-activity/ {print $$2}'|awk -F"'" '/name=/ {print $$2}' | grep MainActivity))
 endef
 
-FLASHLIB := app/src/main/jniLibs/armeabi-v7a/libgojni.so
+FLASHLIB := app/libs/client.aar
 
 .PHONY: all
 
-all: test-flashlib build-debug install run
+all: build-debug install run
 
 test-flashlib:
 	@if test ! -f $(FLASHLIB); then \

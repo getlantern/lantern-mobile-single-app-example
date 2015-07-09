@@ -1,14 +1,13 @@
 package org.getlantern.flashlighttester;
 
-import go.Go;
-import go.flashlight.Flashlight;
+import go.client.*;
+//import go.flashlight.Flashlight;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import org.getlantern.flashlighttester.R;
-//import org.getlantern.example.R;
 
 
 public class MainActivity extends Activity {
@@ -24,7 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_activity);
 
         // Initializing application context.
-        Go.init(getApplicationContext());
+        //.init(getApplicationContext());
 
         killButton = (Button)findViewById(R.id.stopProxyButton);
         startButton = (Button)findViewById(R.id.startProxyButton);
@@ -40,7 +39,7 @@ public class MainActivity extends Activity {
 
         Log.v("DEBUG", "Attempt to stop running proxy.");
         try {
-            Flashlight.StopClientProxy();
+            Client.StopClientProxy();
         } catch (Exception e) {
             throw new RuntimeException(e);
         };
@@ -57,7 +56,7 @@ public class MainActivity extends Activity {
         Log.v("DEBUG", "Attempt to run client proxy on :9192");
 
         try {
-            Flashlight.RunClientProxy("0.0.0.0:9192", "FlashlightTester");
+            Client.RunClientProxy("0.0.0.0:9192", "FlashlightTester");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
