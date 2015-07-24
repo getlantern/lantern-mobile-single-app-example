@@ -5,7 +5,7 @@ define pkg_variables
 	$(eval MAIN_ACTIVITY := $(shell aapt dump badging $(APK_FILE)|awk -F" " '/launchable-activity/ {print $$2}'|awk -F"'" '/name=/ {print $$2}' | grep MainActivity))
 endef
 
-FLASHLIB := app/libs/client.aar
+FLASHLIB := app/libs/libflashlight.aar
 
 .PHONY: all
 
@@ -18,7 +18,7 @@ test-flashlib:
   fi
 
 build-debug:
-	./gradlew assembleDebug
+	@./gradlew assembleDebug
 
 $(APK_FILE): build-debug
 
@@ -35,5 +35,4 @@ run:
 	adb shell am start -n $(PACKAGE)/$(MAIN_ACTIVITY)
 
 clean:
-	./gradlew clean && rm $(FLASHLIB)
-
+	@./gradlew clean #&& rm $(FLASHLIB)

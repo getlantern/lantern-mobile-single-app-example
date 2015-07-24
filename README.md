@@ -5,5 +5,6 @@
 Usage:
 
 ```
-make -C $LANTERN_DIR android-lib-dev && make -C $FLASHLIGHT_ANDROID_TESTER_DIR
+FIRETWEET_MAIN_DIR=/path-to-tester-app-dir/app make -C /path/to/lantern android-lib
+make -C /path/to/android-tester
 ```
