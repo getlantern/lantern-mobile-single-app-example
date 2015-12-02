@@ -71,7 +71,7 @@ Basically you need to import the `libflashlight.aar` library into your project
 and import the `go.client.Client` package:
 
 ```java
-import import go.client.Client;
+import go.client.Client;
 ```
 
 You can then launch a proxy with this piece of code:
